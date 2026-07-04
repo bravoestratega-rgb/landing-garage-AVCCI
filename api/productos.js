@@ -4,7 +4,7 @@ export default async function handler(req, res) {
 
     try {
         // Reemplaza esta URL con tu dirección real de Airtable (ID de Base y Tabla)
-        const respuesta = await fetch('https://api.airtable.com/v0/TU_ID_DE_BASE/TU_NOMBRE_DE_TABLA', {
+        const respuesta = await fetch('https://api.airtable.com/v0/appqa7V445d14XbPC/articulos', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
