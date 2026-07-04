@@ -1,9 +1,15 @@
 const contenedor = document.getElementById('contenedor-ropa');
 
 // Recuerda que aquí va tu URL de Airtable con tu Base ID y nombre de tabla
+console.log("Iniciando conexión:", datos);
 fetch('/api/productos')
-.then(respuesta => respuesta.json())
+.then(respuesta => {
+    // Verificamos si la respuesta del servidor es correcta
+    console.log("Estado de la respuesta:", respuesta.status);
+    return respuesta.json();
+})
 .then(datos => {
+    console.log("Datos recibidos:", datos);
     
     // 👕 PESTAÑA 1: ROPA Y CALZADO
     document.getElementById('boton-ropa').addEventListener('click', () => {
