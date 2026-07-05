@@ -50,13 +50,14 @@ function renderizarProducto(registro) {
 
     // Codificamos el mensaje para que sea válido en una URL
     const mensaje = encodeURIComponent(`Hola voluntarios AVCCI, me interesa el artículo: ${registro.fields.articulo}. 
-    
+    const fotoUrl = registro.fields.foto[0].url; 
 Es este artículo: https://airtable.com/appqa7V445d14XbPC/tblENJPZ46SzUxSNt/${registro.id}`);
 
     const contenedor = document.getElementById('contenedor-ropa');
     contenedor.innerHTML += `
         <div class="tarjeta-ropa">
-            <img src="${registro.fields.foto[0].url}" style="width: 200px; border-radius: 8px;">
+            <!-- AQUÍ AGREGAMOS EL ONCLICK -->
+            <img src="${fotoUrl}" onclick="abrirModal('${fotoUrl}')" style="width: 200px; border-radius: 8px; cursor: pointer;">
             <h3>${registro.fields.articulo}</h3>
             <p>💰 Precio: ${registro.fields.precio} Bs</p>
             ${etiquetaAlerta}
@@ -65,4 +66,11 @@ Es este artículo: https://airtable.com/appqa7V445d14XbPC/tblENJPZ46SzUxSNt/${re
             <a href="https://wa.me/59176208782?text=${mensaje}" target="_blank">Reservar por WhatsApp</a>
         </div>
     `;
+}
+
+function abrirModal(url) {
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modal-img');
+    modalImg.src = url;
+    modal.style.display = 'flex';
 }
