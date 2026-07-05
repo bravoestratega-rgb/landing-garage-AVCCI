@@ -57,7 +57,7 @@ function renderizarProducto(registro) {
             ${etiquetaAlerta}
             <p>📝 ${registro.fields.descripcion}</p>
             <br>
-            <a href="https://wa.me/591XXXXXXXX?text=Hola voluntarios AVCCI, me interesa el artículo: ${registro.fields.articulo}">Reservar por WhatsApp</a>
+            <a href="https://wa.me/59176208782?text=Hola voluntarios AVCCI, me interesa el artículo: ${registro.fields.articulo}">Reservar por WhatsApp</a>
         </div>
     `;
 }
