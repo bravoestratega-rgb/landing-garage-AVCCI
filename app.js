@@ -48,15 +48,18 @@ function renderizarProducto(registro) {
         etiquetaAlerta = `<p style="background-color: yellow; font-weight: bold;">Estado: ${registro.fields.estado}</p>`;
     }
 
-    // Codificamos el mensaje para que sea válido en una URL
-    const mensaje = encodeURIComponent(`Hola voluntarios AVCCI, me interesa el artículo: ${registro.fields.articulo}. 
+    // 1. Declaramos la URL de la foto primero
     const fotoUrl = registro.fields.foto[0].url; 
+
+    // 2. Definimos el mensaje correctamente
+    const mensaje = encodeURIComponent(`Hola voluntarios AVCCI, me interesa el artículo: ${registro.fields.articulo}. 
 Es este artículo: https://airtable.com/appqa7V445d14XbPC/tblENJPZ46SzUxSNt/${registro.id}`);
 
     const contenedor = document.getElementById('contenedor-ropa');
+    
+    // 3. Usamos la variable fotoUrl dentro del HTML
     contenedor.innerHTML += `
         <div class="tarjeta-ropa">
-            <!-- AQUÍ AGREGAMOS EL ONCLICK -->
             <img src="${fotoUrl}" onclick="abrirModal('${fotoUrl}')" style="width: 200px; border-radius: 8px; cursor: pointer;">
             <h3>${registro.fields.articulo}</h3>
             <p>💰 Precio: ${registro.fields.precio} Bs</p>
