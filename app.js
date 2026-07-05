@@ -41,7 +41,7 @@ function renderizarProducto(registro) {
             <h3>${registro.fields.articulo}</h3>
             <p>📝 ${registro.fields.descripcion}</p>
             <p>💰 ${registro.fields.precio} Bs</p>
-            <a href="https://wa.me/59176208782?text=${mensaje}" target="_blank">Reservar por WhatsApp</a>
+            <a href="https://wa.me/59160500260?text=${mensaje}" target="_blank">Reservar por WhatsApp</a>
         </div>
     `;
 }
