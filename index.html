@@ -5,95 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Venta de Garaje AVCCI</title>
     <style>
-        /* Base y tipografía */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f7f6;
-        }
-
-        /* Contenedor principal que limita el ancho para evitar estiramiento en PC */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px;
-            background: white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border-radius: 12px;
-        }
-
-        h1, h2 { color: #2c3e50; text-align: center; }
-
-        /* Estilo para la sección de CTA */
-        .cta-section {
-            text-align: center;
-            margin: 30px 0;
-            padding: 20px;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
-        }
-
-        /* Estilo para los botones */
-        .btn {
-            padding: 12px 25px;
-            margin: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            border-radius: 25px;
-            background-color: #3498db;
-            color: white;
-            transition: background 0.3s ease;
-        }
-
+        /* Estilos base */
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; color: #333; }
+        
+        .container { max-width: 800px; margin: 0 auto; padding: 40px; background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; }
+        
+        .cta-section { text-align: center; margin: 30px 0; border-top: 1px solid #eee; padding-top: 20px; }
+        .btn { padding: 12px 25px; margin: 10px; font-size: 16px; cursor: pointer; border: none; border-radius: 25px; background-color: #3498db; color: white; transition: 0.3s; }
         .btn:hover { background-color: #2980b9; }
 
-        /* Estilos de soporte para info y pasos */
-        .pasos {
-            background: #fff9e6;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
+        /* Contenedor de productos (Aquí ocurre la magia) */
+        #contenedor-ropa { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; padding: 40px 0; max-width: 1000px; margin: 0 auto; }
 
-        .info-box {
-            background: #e8f6f3;
-            padding: 15px;
-            border-left: 5px solid #1abc9c;
-            margin: 20px 0;
-            text-align: center;
-        }
+        /* Estilo de Tarjetas */
+        .tarjeta-ropa { background: white; border-radius: 12px; padding: 20px; width: 250px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center; display: flex; flex-direction: column; }
+        .tarjeta-ropa img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
+        .tarjeta-ropa a { margin-top: auto; background: #25D366; color: white; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h1>Venta de Garage AVCCI 🎗️</h1>
-    <p>Hemos unido fuerzas con nuestra comunidad para organizar una Venta de Garaje Solidaria. Cada artículo que encuentres aquí fue donado por voluntarios comprometidos; al adquirirlo, el 100% de tu compra se destina directamente al apoyo integral de niños con cáncer y sus familias.</p>
+    <p style="text-align: center;">Hemos unido fuerzas con nuestra comunidad para organizar una Venta de Garaje Solidaria. Cada artículo que ves aquí fue donado por voluntarios; al adquirirlo, el 100% de tu compra se destina al apoyo integral de niños con cáncer y sus familias.</p>
 
-    <!-- Sección de acción principal -->
     <div class="cta-section">
-        <h2 style="font-size: 1.2em; margin-bottom: 15px;">¿Qué productos quisieras revisar?</h2>
         <button id="boton-ropa" class="btn">👕 Ropa y Calzado</button>
         <button id="boton-variados" class="btn">📦 Artículos Variados</button>
-    </div>
-
-    <!-- Información secundaria -->
-    <div class="pasos">
-        <h3>Pasos para ayudar:</h3>
-        <ol>
-            <li><strong>Explora:</strong> Elige una categoría de arriba.</li>
-            <li><strong>Reserva:</strong> Haz clic en el botón de WhatsApp del producto que te guste.</li>
-            <li><strong>Recoge:</strong> Ven a nuestra sede por tu compra.</li>
-        </ol>
-    </div>
-
-    <div class="info-box">
-        <strong>🗓️ ¿Cuándo?</strong> Sábado, 11 de julio.<br>
-        <strong>📍 ¿Dónde?</strong> Calle Víctor Sanjinés #2803 (cerca de Plaza España, Sopocachi).
     </div>
 </div>
 
