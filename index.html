@@ -22,6 +22,27 @@
         .tarjeta-ropa { background: white; border-radius: 12px; padding: 20px; width: 250px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center; display: flex; flex-direction: column; }
         .tarjeta-ropa img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
         .tarjeta-ropa a { margin-top: auto; background: #25D366; color: white; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: bold; }
+        .tarjeta-ropa img { cursor: pointer; transition: transform 0.2s; }
+        .tarjeta-ropa img:hover { transform: scale(1.05); }
+
+        #modal { 
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.8); 
+            justify-content: center; 
+            align-items: center; 
+        }
+        #modal img { max-width: 90%; max-height: 80%; border-radius: 8px; }
+        #modal span { 
+            position: absolute; 
+            top: 20px; right: 30px; 
+            color: white; 
+            font-size: 40px; 
+            cursor: pointer; 
+        }
     </style>
 </head>
 <body>
@@ -38,7 +59,10 @@
 </div>
 
 <div id="contenedor-ropa"></div>
-
+<div id="modal" onclick="this.style.display='none'">
+        <span onclick="this.parentElement.style.display='none'">&times;</span>
+        <img id="modal-img" src="">
+    </div>
 <script src="app.js"></script>
 </body>
 </html>
