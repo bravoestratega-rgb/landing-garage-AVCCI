@@ -48,6 +48,12 @@ function renderizarProducto(registro) {
         etiquetaAlerta = `<p style="background-color: yellow; font-weight: bold;">Estado: ${registro.fields.estado}</p>`;
     }
 
+    // Codificamos el mensaje para que sea válido en una URL
+    const mensaje = encodeURIComponent(`Hola voluntarios AVCCI, me interesa el artículo: ${registro.fields.articulo}. 
+    
+    ID del artículo: ${registro.id}
+    Puedes verlo aquí: https://airtable.com/appqa7V445d14XbPC/tblENJPZ46SzUxSNt/${registro.id}`);
+
     const contenedor = document.getElementById('contenedor-ropa');
     contenedor.innerHTML += `
         <div class="tarjeta-ropa">
@@ -57,7 +63,7 @@ function renderizarProducto(registro) {
             ${etiquetaAlerta}
             <p>📝 ${registro.fields.descripcion}</p>
             <br>
-            <a href="https://wa.me/59176208782?text=Hola voluntarios AVCCI, me interesa el artículo: ${registro.fields.articulo}">Reservar por WhatsApp</a>
+            <a href="https://wa.me/59176208782?text=${mensaje}" target="_blank">Reservar por WhatsApp</a>
         </div>
     `;
 }
