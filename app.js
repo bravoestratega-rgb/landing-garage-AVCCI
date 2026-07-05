@@ -1,71 +1,69 @@
 const contenedor = document.getElementById('contenedor-ropa');
+let todosLosProductos = [];
+let productosFiltrados = [];
+let indiceActual = 0;
+const TAMANO_PAGINA = 6; 
 
-// Realizamos la petición al servidor
+// Realizamos la petición al servidor una sola vez[cite: 10]
 fetch('/api/productos')
-    .then(respuesta => {
-        if (!respuesta.ok) {
-            throw new Error('Error en la respuesta del servidor');
-        }
-        return respuesta.json();
-    })
+    .then(respuesta => respuesta.json())
     .then(datos => {
-        // Verificamos si los datos tienen el formato correcto
-        if (!datos || !datos.records) {
-            console.error("No se encontraron registros en la respuesta", datos);
-            contenedor.innerHTML = '<p>No hay productos disponibles en este momento.</p>';
-            return;
+        if (datos && datos.records) {
+            todosLosProductos = datos.records;
+            document.getElementById('boton-ropa').addEventListener('click', () => filtrar('Ropa y Calzado'));
+            document.getElementById('boton-variados').addEventListener('click', () => filtrar('Variados'));
         }
-
-        // 👕 PESTAÑA 1: ROPA Y CALZADO
-        document.getElementById('boton-ropa').addEventListener('click', () => {
-            contenedor.innerHTML = ''; 
-            datos.records.forEach(registro => {
-                if (registro.fields.categoria === "Ropa y Calzado") {
-                    renderizarProducto(registro);
-                } 
-            });
-        });
-
-        // 📦 PESTAÑA 2: ARTÍCULOS VARIADOS
-        document.getElementById('boton-variados').addEventListener('click', () => {
-            contenedor.innerHTML = ''; 
-            datos.records.forEach(registro => {
-                if (registro.fields.categoria !== "Ropa y Calzado") {
-                    renderizarProducto(registro);
-                } 
-            });
-        });
     })
-    .catch(error => {
-        console.error("Error al conectar:", error);
-        contenedor.innerHTML = '<p>Lo sentimos, hubo un problema al cargar los productos.</p>';
+    .catch(error => console.error("Error al conectar:", error));
+
+function filtrar(categoriaSeleccionada) {
+    indiceActual = 0;
+    contenedor.innerHTML = '';
+    
+    // Filtramos los productos según la categoría[cite: 10]
+    productosFiltrados = todosLosProductos.filter(registro => {
+        return categoriaSeleccionada === 'Ropa y Calzado' 
+            ? registro.fields.categoria === "Ropa y Calzado" 
+            : registro.fields.categoria !== "Ropa y Calzado";
     });
 
-// Función auxiliar para no repetir código (limpieza de código)
-function renderizarProducto(registro) {
-    let etiquetaAlerta = ""; 
-    if (registro.fields.estado === "Vendido" || registro.fields.estado === "Reservado") {
-        etiquetaAlerta = `<p style="background-color: yellow; font-weight: bold;">Estado: ${registro.fields.estado}</p>`;
-    }
+    cargarBloque();
+}
 
-    // 1. Declaramos la URL de la foto primero
-    const fotoUrl = registro.fields.foto[0].url; 
-
-    // 2. Definimos el mensaje correctamente
-    const mensaje = encodeURIComponent(`Hola voluntarios AVCCI, me interesa el artículo: ${registro.fields.articulo}. 
-Es este artículo: https://airtable.com/appqa7V445d14XbPC/tblENJPZ46SzUxSNt/${registro.id}`);
-
-    const contenedor = document.getElementById('contenedor-ropa');
+function cargarBloque() {
+    const fin = Math.min(indiceActual + TAMANO_PAGINA, productosFiltrados.length);
     
-    // 3. Usamos la variable fotoUrl dentro del HTML
+    // Renderizamos solo el bloque de productos correspondiente[cite: 10]
+    for (let i = indiceActual; i < fin; i++) {
+        renderizarProducto(productosFiltrados[i]);
+    }
+    
+    indiceActual = fin;
+    actualizarBotonVerMas();
+}
+
+function actualizarBotonVerMas() {
+    let btnMas = document.getElementById('btn-ver-mas');
+    if (btnMas) {
+        // Mostramos el botón solo si quedan productos pendientes[cite: 10]
+        btnMas.style.display = (indiceActual < productosFiltrados.length) ? 'block' : 'none';
+    }
+}
+
+function renderizarProducto(registro) {
+    const fotoUrl = registro.fields.foto[0].url;
+    
+    // Construcción del mensaje para WhatsApp con el enlace de Airtable[cite: 10]
+    const urlRegistro = `https://airtable.com/appqa7V445d14XbPC/tblENJPZ46SzUxSNt/${registro.id}`;
+    const textoMensaje = `Hola voluntarios AVCCI, me interesa el artículo: ${registro.fields.articulo}. \n\nEs este artículo: ${urlRegistro}`;
+    const mensaje = encodeURIComponent(textoMensaje);
+    
     contenedor.innerHTML += `
         <div class="tarjeta-ropa">
             <img src="${fotoUrl}" onclick="abrirModal('${fotoUrl}')" style="width: 200px; border-radius: 8px; cursor: pointer;">
             <h3>${registro.fields.articulo}</h3>
             <p>💰 Precio: ${registro.fields.precio} Bs</p>
-            ${etiquetaAlerta}
-            <p>📝 ${registro.fields.descripcion}</p>
-            <br>
+            ${registro.fields.estado ? `<p style="background-color: yellow; font-weight: bold;">Estado: ${registro.fields.estado}</p>` : ''}
             <a href="https://wa.me/59176208782?text=${mensaje}" target="_blank">Reservar por WhatsApp</a>
         </div>
     `;
@@ -73,7 +71,6 @@ Es este artículo: https://airtable.com/appqa7V445d14XbPC/tblENJPZ46SzUxSNt/${re
 
 function abrirModal(url) {
     const modal = document.getElementById('modal');
-    const modalImg = document.getElementById('modal-img');
-    modalImg.src = url;
+    document.getElementById('modal-img').src = url;
     modal.style.display = 'flex';
 }
