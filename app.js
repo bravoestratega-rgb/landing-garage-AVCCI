@@ -51,7 +51,6 @@ function renderizarProducto(registro) {
     // Codificamos el mensaje para que sea válido en una URL
     const mensaje = encodeURIComponent(`Hola voluntarios AVCCI, me interesa el artículo: ${registro.fields.articulo} (Ref: #${registro.fields.numeroReferencia}). 
     
-    ID del artículo: ${registro.id}
     Es este artículo: https://airtable.com/appqa7V445d14XbPC/tblENJPZ46SzUxSNt/${registro.id}`);
 
     const contenedor = document.getElementById('contenedor-ropa');
