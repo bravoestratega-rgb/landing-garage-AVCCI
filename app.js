@@ -39,6 +39,7 @@ function renderizarProducto(registro) {
         <div class="tarjeta-ropa">
             <img src="${fotoThumbnail}" onclick="abrirModal('${fotoUrl}')" style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px; cursor: pointer;">
             <h3>${registro.fields.articulo}</h3>
+            <p>📝 ${registro.fields.descripcion}</p>
             <p>💰 ${registro.fields.precio} Bs</p>
             <a href="https://wa.me/59176208782?text=${mensaje}" target="_blank">Reservar por WhatsApp</a>
         </div>
