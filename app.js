@@ -7,10 +7,13 @@ const TAMANO_PAGINA = 6;
 fetch('/api/productos')
     .then(respuesta => respuesta.json())
     .then(datos => {
-        todosLosProductos = datos.records;
+        // AQUÍ ESTÁ EL CAMBIO:
+        // Filtramos para que solo pasen los productos cuyo 'estado' NO sea 'Vendido'
+        // Asegúrate de que 'estado' sea el nombre exacto de tu columna en Airtable
+        todosLosProductos = datos.records.filter(r => r.fields.estado !== 'Vendido');
+        
         document.getElementById('boton-ropa').addEventListener('click', () => filtrar('Ropa y Calzado'));
         document.getElementById('boton-variados').addEventListener('click', () => filtrar('Variados'));
-        // Asegurar que el botón tenga el evento al cargar
         document.getElementById('btn-ver-mas').addEventListener('click', cargarBloque);
     });
 
